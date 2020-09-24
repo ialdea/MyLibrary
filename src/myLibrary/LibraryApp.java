@@ -5,6 +5,7 @@ public class LibraryApp {
 	public static void main(String[] args) {
 		
 		Author eliade = new Author("Eliade", "Mircea");
+		Author sadoveanu = new Author("Sadoveanu", "Mihail");
 		Genre romantic = new Genre("romantic");
 		PublishingHouse teora = new PublishingHouse("teora");
 		Book b1 = new Book("Nunta in cer", eliade, romantic, teora);
@@ -20,10 +21,34 @@ public class LibraryApp {
 		library.addBook(b2);
 		library.listAllBooks();
 		
-//		System.out.println("----stud methods-----");
-//		s1.addToMyLoanList(b1);
-//		s1.addToMyLoanList(b2);
-//		s1.listMyLoanList();
+		System.out.println("-----test for authors----");
+		library.addAuthor(eliade);
+		library.addAuthor(sadoveanu);
+	
+		//library.removeAuthor("Eliade");
+		//library.listAllAuthors();
+		try {
+			Author a = library.searchAuthorByName("Eminescu");
+			System.out.println(a.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		library.listAllAuthors();
+		
+		System.out.println("-----test for students-----");
+		library.addStudent(s1);
+		library.addStudent(s2);
+		library.listAllStudents();
+//		library.removeStudent("Grigorescu Razvan");
+//		library.listAllStudents();
+		Student s = library.searchStudentByName("Serban Ana");
+		System.out.println(s.toString());
+		
+		System.out.println("----stud methods-----");
+		s1.addToMyLoanList(b1);
+		s1.addToMyLoanList(b2);
+		s1.listMyLoanList();
 //		s1.removeFromLoanList("Nunta in cer");
 //		s1.listMyLoanList();
 	}

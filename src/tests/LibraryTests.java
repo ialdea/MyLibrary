@@ -16,6 +16,5 @@ public class LibraryTests {
 		Library l = Library.getInstance();
 		l.listAllBooks();
 		assertNotNull(l.getBooks());
-		
 	}
 }

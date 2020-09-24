@@ -48,7 +48,7 @@ public class Student {
 	
 	public void listMyLoanList() {
 		for(Book b : loanList.getBooksToLoan()) {
-			System.out.println(b.getTitle());
+			System.out.println(b.toString());
 		}
 	}
 }

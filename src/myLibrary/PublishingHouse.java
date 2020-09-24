@@ -2,7 +2,9 @@ package myLibrary;
 
 public class PublishingHouse {
 
-	String name;
+	private String name;
+	
+	public String getName() {return this.name;}
 	
 	public PublishingHouse(String name) {
 		this.name = name;

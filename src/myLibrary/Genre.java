@@ -14,4 +14,13 @@ public class Genre {
 	public String toString() {
 		return name;
 	}
+	
+	@Override
+	public boolean equals(Object anotherGenre) {
+		if(anotherGenre instanceof Genre) {
+			Genre g = (Genre) anotherGenre;
+			return this.name.equals(g.name);
+		}
+		return false;
+	}
 }
