@@ -15,8 +15,9 @@ public class LoanList {
 	}
 	
 	public void addBook(Book book) {
-		Book b = new Book(book.getTitle(), book.getAuthor(), book.getGenre(), book.getPubH());
-		booksToLoan.add(b);
+//		Book b = new Book(book.getTitle(), book.getAuthor(), book.getGenre(), book.getPubH());
+		booksToLoan.add(book);
+		Library.getInstance().removeBook(book.getTitle());
 	}
 	
 	public void removeBook(String title) {
@@ -25,7 +26,16 @@ public class LoanList {
 			Book b = itr.next();
 			if(b.getTitle().equals(title)) {
 				booksToLoan.remove(b);
+				Library.getInstance().getBooks().put(b.getTitle(), b);
 			}
 		}
 	}
+	
+	public void listTheLoanList() {
+		for(Book b : booksToLoan) {
+			System.out.println(b.toString());
+		}
+	}
+	
+	
 }

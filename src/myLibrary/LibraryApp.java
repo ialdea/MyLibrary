@@ -45,12 +45,16 @@ public class LibraryApp {
 		Student s = library.searchStudentByName("Serban Ana");
 		System.out.println(s.toString());
 		
-		System.out.println("----stud methods-----");
-		s1.addToMyLoanList(b1);
-		s1.addToMyLoanList(b2);
-		s1.listMyLoanList();
+//		System.out.println("----stud methods-----");
+//		s1.addToMyLoanList(b1);
+//		s1.addToMyLoanList(b2);
+//		s1.listMyLoanList();
+//		library.listAllBooks();
 //		s1.removeFromLoanList("Nunta in cer");
 //		s1.listMyLoanList();
+		
+		System.out.println("-----test for xml----");
+		Book.bookToXML(b1);
 	}
 
 }

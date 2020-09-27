@@ -14,10 +14,9 @@ public class Library {
 	
 	public static Library getInstance() {
 		if(instance == null) {
-			return new Library();
-		}else {
-			return instance;
+			instance = new Library();
 		}
+		return instance;
 	}
 	
 	private Map<String, Book> books;

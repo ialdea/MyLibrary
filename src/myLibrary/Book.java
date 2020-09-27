@@ -1,12 +1,27 @@
 package myLibrary;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.OutputStream;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Book {
 	
+	@XmlElement
 	private String title;
+	@XmlElement
 	private Author author;
 	private Genre genre;
 	private PublishingHouse pubH;
 	
+	@XmlAttribute
 	private int ibsn; 	//international standard book number
 	public static int nextIBSN = 100;
 	
@@ -15,6 +30,8 @@ public class Book {
 	public int getIbsn() {return this.ibsn;}
 	public Genre getGenre() {return this.genre;}
 	public PublishingHouse getPubH() {return this.pubH;}
+	
+	public Book() {}
 	
 	public Book(String title, Author a, Genre genre, PublishingHouse ph) {
 		this.ibsn = nextIBSN;
@@ -27,5 +44,21 @@ public class Book {
 	
 	public String toString() {
 		return ibsn+", "+title+", "+author.toString()+", "+genre.toString()+", "+pubH.toString();
+	}
+	
+	public static void bookToXML(Book book) {
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(Book.class);
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+//			File file = new File("book.xml");
+//			jaxbMarshaller.marshal(book, file);
+			OutputStream os = new ByteArrayOutputStream();
+			jaxbMarshaller.marshal(book, os);
+			String xmlStr = new String(((ByteArrayOutputStream)os).toByteArray());
+			System.out.println(xmlStr);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
 	}
 }
