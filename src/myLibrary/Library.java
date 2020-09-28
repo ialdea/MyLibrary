@@ -1,6 +1,11 @@
 package myLibrary;
 
+import java.io.File;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -8,6 +13,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+
+@XmlRootElement
 public class Library {
 	
 	private static Library instance;
@@ -18,6 +33,7 @@ public class Library {
 		}
 		return instance;
 	}
+
 	
 	private Map<String, Book> books;
 	private Map<String, Student> students;
@@ -28,6 +44,21 @@ public class Library {
 	public Map<String, Student> getStudents(){return this.students;}
 	public Set<Author> getAuthors() {return this.authors;}
 	public Set<PublishingHouse> getPupHouses() {return this.pubHouses;}
+	
+	@XmlElement(name = "book")
+	public ArrayList<Book> getBooksList(){
+		ArrayList<Book> ar = new ArrayList<Book>();
+		
+		for(Book b : books.values()) {
+			ar.add(b);
+		}
+		return ar;
+	}
+	
+	public List<Author> getAuthorsList(){
+		ArrayList<Author> aut = new ArrayList<>(authors);
+		return aut;
+	}
 	
 	private Library() {
 		this.books = new HashMap<>();
@@ -176,6 +207,54 @@ public class Library {
 		return list;
 	}
 	
+	public void booksListToXml() {
+		try {
+			JAXBContext context = JAXBContext.newInstance(Book.class);
+			Marshaller marshaller = context.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			File file = new File("booksList.xml");
+			
+			ArrayList<Book> ar = new ArrayList<Book>();
+			
+			String booksXml = "";
+			for(Book b : books.values()) {
+				StringWriter sw = new StringWriter();
+				marshaller.marshal(b, sw);
+				if(ar.size() > 0) {
+					booksXml += sw.toString().substring(sw.toString().indexOf("\n"));
+				}else {
+					booksXml += sw.toString();
+				}
+				ar.add(b);
+			}
+			booksXml = booksXml.split("\n")[0] + "\n<library>"+ booksXml.substring(booksXml.indexOf("\n"))+"</library>";
+			
+			System.out.println(booksXml);
+			
+			
+			
+			context = JAXBContext.newInstance(Library.class);
+			marshaller = context.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			System.out.println("---------------------------");
+			marshaller.marshal(this, System.out);
+			marshaller.marshal(this, file);
+			System.out.println("---------------------------");
+			
+			
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+	}
 	
+	public void authorsListToXml() {
+		try {
+			JAXBContext context = JAXBContext.newInstance(Library.class);
+			Marshaller marshaller = context.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

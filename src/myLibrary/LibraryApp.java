@@ -1,5 +1,6 @@
 package myLibrary;
 
+
 public class LibraryApp {
 	
 	public static void main(String[] args) {
@@ -54,7 +55,10 @@ public class LibraryApp {
 //		s1.listMyLoanList();
 		
 		System.out.println("-----test for xml----");
-		Book.bookToXML(b1);
+//		Book.bookToXML(b1);
+//		Book.bookToXML(b2);
+		
+		library.booksListToXml();
+		
 	}
-
 }

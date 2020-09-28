@@ -48,11 +48,20 @@ public class Book {
 	
 	public static void bookToXML(Book book) {
 		try {
+			//create an instance of JAXBContext;
 			JAXBContext jaxbContext = JAXBContext.newInstance(Book.class);
+			
+			//create an instance of Marshaller
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-//			File file = new File("book.xml");
-//			jaxbMarshaller.marshal(book, file);
+			
+			//create XML file
+			File file = new File("book.xml");
+			
+			//convert object to XML file
+			jaxbMarshaller.marshal(book, file);
+			
+			//printeaza continutul XML ului in consola
 			OutputStream os = new ByteArrayOutputStream();
 			jaxbMarshaller.marshal(book, os);
 			String xmlStr = new String(((ByteArrayOutputStream)os).toByteArray());
