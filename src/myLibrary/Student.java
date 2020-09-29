@@ -1,16 +1,27 @@
 package myLibrary;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Student {
 	
+	@XmlElement
 	private String nameAndSurname;
+	@XmlElement
 	private int age;
+	@XmlElement
 	private boolean gender;
+	@XmlElement
 	private String school;
+	@XmlElement
 	private String adress;
+	@XmlElement
 	private String phone;
+	@XmlElement
 	private int registerId;
+	@XmlElement
 	LoanList loanList;
-	//fiecare student are un LoanList si aici fac functia addToMyLoanList, apelez loanList.addBook
 	
 	private static int nextId = 1;
 	
@@ -20,6 +31,8 @@ public class Student {
 	public String getSchool() {return this.school;}
 	public String getAdress() {return this.adress;}
 	public String getPhone() {return this.phone;}
+	
+	public Student() {}
 	
 	public Student(String nameAndSurn, int age, boolean gender, String school, String adress, String phone) {
 		this.registerId = nextId;

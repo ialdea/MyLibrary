@@ -18,7 +18,9 @@ public class Book {
 	private String title;
 	@XmlElement
 	private Author author;
+	@XmlElement
 	private Genre genre;
+	@XmlElement(name = "publishing house")
 	private PublishingHouse pubH;
 	
 	@XmlAttribute

@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class LoanList {
 	
+	@XmlElement
 	private List<Book> booksToLoan;
 	
 	public List<Book> getBooksToLoan() {return this.booksToLoan;}
+	//public void setBooksToLoan(List<Book> ls) {this.booksToLoan = ls;}
 	
 	public LoanList() {
 		this.booksToLoan = new ArrayList<>();

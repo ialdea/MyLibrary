@@ -16,13 +16,8 @@ import java.util.Set;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 
-@XmlRootElement
 public class Library {
 	
 	private static Library instance;
@@ -39,16 +34,17 @@ public class Library {
 	private Map<String, Student> students;
 	private Set<Author> authors;
 	private Set<PublishingHouse> pubHouses;
+	private Set<Genre> genres;
 	
 	public Map<String, Book> getBooks() {return this.books;}
 	public Map<String, Student> getStudents(){return this.students;}
 	public Set<Author> getAuthors() {return this.authors;}
 	public Set<PublishingHouse> getPupHouses() {return this.pubHouses;}
+	public Set<Genre> getGenres(){return this.genres;}
 	
-	@XmlElement(name = "book")
+	
 	public ArrayList<Book> getBooksList(){
 		ArrayList<Book> ar = new ArrayList<Book>();
-		
 		for(Book b : books.values()) {
 			ar.add(b);
 		}
@@ -60,11 +56,30 @@ public class Library {
 		return aut;
 	}
 	
+	public List<Genre> getGenresList(){
+		ArrayList<Genre> gen = new ArrayList<Genre>(genres);
+		return gen;
+	}
+	
+	public List<PublishingHouse> getPubHousesList(){
+		ArrayList<PublishingHouse> ph = new ArrayList<PublishingHouse>(pubHouses);
+		return ph;
+	}
+	
+	public List<Student> getStudentsList(){
+		ArrayList<Student> stud = new ArrayList<Student>();
+		for(Student s : students.values()) {
+			stud.add(s);
+		}
+		return stud;
+	}
+	
 	private Library() {
 		this.books = new HashMap<>();
 		this.students = new HashMap<>();
 		this.authors = new HashSet<>();
 		this.pubHouses = new HashSet<>();
+		this.genres = new HashSet<>();
 	}
 	
 	public void addBook(String title, Author a, Genre g, PublishingHouse p) {
@@ -128,8 +143,7 @@ public class Library {
 	}
 	
 	public void addStudent(Student s) {
-		Student stud = new Student(s.getNameAndSurname(), s.getAge(), s.getGender(), s.getSchool(), s.getAdress(), s.getPhone());
-		students.put(stud.getNameAndSurname(), stud);
+		students.put(s.getNameAndSurname(), s);
 	}
 	
 	public void removeStudent(String nameAndSurname) {
@@ -207,38 +221,50 @@ public class Library {
 		return list;
 	}
 	
+	public void addGenre(Genre gen) {
+		Genre g = new Genre(gen.getGenreName());
+		genres.add(g);
+	}
+	
+	public void listAllGenres() {
+		for(Genre g : genres) {
+			System.out.println(g);
+		}
+	}
+	
 	public void booksListToXml() {
 		try {
-			JAXBContext context = JAXBContext.newInstance(Book.class);
+//			JAXBContext context = JAXBContext.newInstance(Book.class);
+//			Marshaller marshaller = context.createMarshaller();
+//			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			File file = new File("booksList.xml");
+//			
+//			ArrayList<Book> ar = new ArrayList<Book>();
+//			
+//			String booksXml = "";
+//			for(Book b : books.values()) {
+//				StringWriter sw = new StringWriter();
+//				marshaller.marshal(b, sw);
+//				if(ar.size() > 0) {
+//					booksXml += sw.toString().substring(sw.toString().indexOf("\n"));
+//				}else {
+//					booksXml += sw.toString();
+//				}
+//				ar.add(b);
+//			}
+//			booksXml = booksXml.split("\n")[0] + "\n<library>"+ booksXml.substring(booksXml.indexOf("\n"))+"</library>";
+//			
+//			System.out.println(booksXml);
+			
+			
+			
+			JAXBContext context = JAXBContext.newInstance(BooksWrapper.class);
 			Marshaller marshaller = context.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-			File file = new File("booksList.xml");
-			
-			ArrayList<Book> ar = new ArrayList<Book>();
-			
-			String booksXml = "";
-			for(Book b : books.values()) {
-				StringWriter sw = new StringWriter();
-				marshaller.marshal(b, sw);
-				if(ar.size() > 0) {
-					booksXml += sw.toString().substring(sw.toString().indexOf("\n"));
-				}else {
-					booksXml += sw.toString();
-				}
-				ar.add(b);
-			}
-			booksXml = booksXml.split("\n")[0] + "\n<library>"+ booksXml.substring(booksXml.indexOf("\n"))+"</library>";
-			
-			System.out.println(booksXml);
-			
-			
-			
-			context = JAXBContext.newInstance(Library.class);
-			marshaller = context.createMarshaller();
-			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			BooksWrapper bw = new BooksWrapper(getBooksList());
 			System.out.println("---------------------------");
-			marshaller.marshal(this, System.out);
-			marshaller.marshal(this, file);
+			marshaller.marshal(bw, System.out);
+			marshaller.marshal(bw, file);
 			System.out.println("---------------------------");
 			
 			
@@ -249,12 +275,59 @@ public class Library {
 	
 	public void authorsListToXml() {
 		try {
-			JAXBContext context = JAXBContext.newInstance(Library.class);
+			JAXBContext context = JAXBContext.newInstance(AuthorsWrapper.class);
 			Marshaller marshaller = context.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			File file = new File("authors.xml");
+			AuthorsWrapper aw = new AuthorsWrapper(getAuthorsList());
+			marshaller.marshal(aw, file);
+			marshaller.marshal(aw, System.out);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void genresListToXml() {
+		try {
+			JAXBContext context = JAXBContext.newInstance(GenresWrapper.class);
+			Marshaller marshaller = context.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			File file = new File("genres.xml");
+			GenresWrapper gw = new GenresWrapper(this.getGenresList());
+			marshaller.marshal(gw, file);
+			marshaller.marshal(gw, System.out);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void pubHousesListToXml() {
+		try {
+			JAXBContext context = JAXBContext.newInstance(PubHousesWrapper.class);
+			Marshaller marshaller = context.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			File file = new File("publishingHouses.xml");
+			PubHousesWrapper phw = new PubHousesWrapper(getPubHousesList());
+			marshaller.marshal(phw, file);
+			marshaller.marshal(phw, System.out);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void studentsListToXml() {
+		try {
+			JAXBContext context = JAXBContext.newInstance(StudentsWrapper.class);
+			Marshaller marshaller = context.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			File file = new File("students.xml");
+			StudentsWrapper sw = new StudentsWrapper(getStudentsList());
+			marshaller.marshal(sw, file);
+			marshaller.marshal(sw, System.out);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

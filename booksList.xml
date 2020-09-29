@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<library>
+<books>
     <book ibsn="101">
         <title>Maitreyi</title>
         <author>
             <name>Eliade</name>
             <surname>Mircea</surname>
         </author>
+        <genre>
+            <genreName>romantic</genreName>
+        </genre>
+        <publishing house>
+            <name>teora</name>
+        </publishing house>
     </book>
     <book ibsn="100">
         <title>Nunta in cer</title>
@@ -13,5 +19,11 @@
             <name>Eliade</name>
             <surname>Mircea</surname>
         </author>
+        <genre>
+            <genreName>romantic</genreName>
+        </genre>
+        <publishing house>
+            <name>teora</name>
+        </publishing house>
     </book>
-</library>
+</books>
