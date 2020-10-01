@@ -28,9 +28,9 @@
                 <genre>
                     <genreName>romantic</genreName>
                 </genre>
-                <publishing house>
+                <publishing_house>
                     <name>teora</name>
-                </publishing house>
+                </publishing_house>
             </booksToLoan>
             <booksToLoan ibsn="101">
                 <title>Maitreyi</title>
@@ -41,9 +41,9 @@
                 <genre>
                     <genreName>romantic</genreName>
                 </genre>
-                <publishing house>
+                <publishing_house>
                     <name>teora</name>
-                </publishing house>
+                </publishing_house>
             </booksToLoan>
         </loanList>
     </student>

@@ -16,6 +16,7 @@ import java.util.Set;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 
 public class Library {
@@ -324,6 +325,77 @@ public class Library {
 			StudentsWrapper sw = new StudentsWrapper(getStudentsList());
 			marshaller.marshal(sw, file);
 			marshaller.marshal(sw, System.out);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void xmlToBooks() {
+		try {
+			JAXBContext context = JAXBContext.newInstance(BooksWrapper.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			File file = new File("booksList.xml");
+			BooksWrapper bw = (BooksWrapper) unmarshaller.unmarshal(file);
+			for(Book b : bw.list) {
+				System.out.println(b);
+			}
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void xmlToAuthors() {
+		try {
+			JAXBContext context = JAXBContext.newInstance(AuthorsWrapper.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			File file = new File("authors.xml");
+			AuthorsWrapper aw = (AuthorsWrapper) unmarshaller.unmarshal(file);
+			for(Author a : aw.list) {
+				System.out.println(a);
+			}
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void xmlToPubHouses() {
+		try {
+			JAXBContext context = JAXBContext.newInstance(PubHousesWrapper.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			File file = new File("publishingHouses.xml");
+			PubHousesWrapper pw = (PubHousesWrapper) unmarshaller.unmarshal(file);
+			for(PublishingHouse ph : pw.list) {
+				System.out.println(ph);
+			}
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void xmlToGenres() {
+		try {
+			JAXBContext context = JAXBContext.newInstance(GenresWrapper.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			File file = new File("genres.xml");
+			GenresWrapper gw = (GenresWrapper) unmarshaller.unmarshal(file);
+			for(Genre g : gw.list) {
+				System.out.println(g);
+			}
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void xmlToStudents() {
+		try {
+			JAXBContext context = JAXBContext.newInstance(StudentsWrapper.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			File file = new File("students.xml");
+			StudentsWrapper sw = (StudentsWrapper) unmarshaller.unmarshal(file);
+			for(Student s : sw.list) {
+				System.out.println(s);
+			}
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}

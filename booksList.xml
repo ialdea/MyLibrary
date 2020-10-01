@@ -9,9 +9,9 @@
         <genre>
             <genreName>romantic</genreName>
         </genre>
-        <publishing house>
+        <publishing_house>
             <name>teora</name>
-        </publishing house>
+        </publishing_house>
     </book>
     <book ibsn="100">
         <title>Nunta in cer</title>
@@ -22,8 +22,8 @@
         <genre>
             <genreName>romantic</genreName>
         </genre>
-        <publishing house>
+        <publishing_house>
             <name>teora</name>
-        </publishing house>
+        </publishing_house>
     </book>
 </books>

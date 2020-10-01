@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,7 +21,7 @@ public class Book {
 	private Author author;
 	@XmlElement
 	private Genre genre;
-	@XmlElement(name = "publishing house")
+	@XmlElement(name = "publishing_house")
 	private PublishingHouse pubH;
 	
 	@XmlAttribute
@@ -68,6 +69,18 @@ public class Book {
 			jaxbMarshaller.marshal(book, os);
 			String xmlStr = new String(((ByteArrayOutputStream)os).toByteArray());
 			System.out.println(xmlStr);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public  void xmlToBook() {
+		try {
+			File file = new File("book.xml");
+			JAXBContext context = JAXBContext.newInstance(Book.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			Book b = (Book) unmarshaller.unmarshal(file);
+			System.out.println(b);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}

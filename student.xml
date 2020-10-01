@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<student>
+    <nameAndSurname>Grigorescu Razvan</nameAndSurname>
+    <age>14</age>
+    <gender>false</gender>
+    <school>Petre Ghelmez School</school>
+    <adress>Morarilor nr. 7</adress>
+    <phone>0765234988</phone>
+    <registerId>1</registerId>
+    <loanList>
+        <booksToLoan ibsn="100">
+            <title>Nunta in cer</title>
+            <author>
+                <name>Eliade</name>
+                <surname>Mircea</surname>
+            </author>
+            <genre>
+                <genreName>romantic</genreName>
+            </genre>
+            <publishing_house>
+                <name>teora</name>
+            </publishing_house>
+        </booksToLoan>
+        <booksToLoan ibsn="101">
+            <title>Maitreyi</title>
+            <author>
+                <name>Eliade</name>
+                <surname>Mircea</surname>
+            </author>
+            <genre>
+                <genreName>romantic</genreName>
+            </genre>
+            <publishing_house>
+                <name>teora</name>
+            </publishing_house>
+        </booksToLoan>
+    </loanList>
+</student>

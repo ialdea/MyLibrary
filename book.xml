@@ -5,4 +5,10 @@
         <name>Eliade</name>
         <surname>Mircea</surname>
     </author>
+    <genre>
+        <name>romantic</name>
+    </genre>
+    <publishing_house>
+        <name>teora</name>
+    </publishing_house>
 </book>

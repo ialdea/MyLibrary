@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<publishing houses>
-    <publishing house>
+<publishing_houses>
+    <publishing_house>
         <name>humanitas</name>
-    </publishing house>
-    <publishing house>
+    </publishing_house>
+    <publishing_house>
         <name>teora</name>
-    </publishing house>
-</publishing houses>
+    </publishing_house>
+</publishing_houses>

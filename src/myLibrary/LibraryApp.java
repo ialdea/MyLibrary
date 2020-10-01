@@ -74,6 +74,21 @@ public class LibraryApp {
 		//library.authorsListToXml();
 //		library.genresListToXml();
 //		library.pubHousesListToXml();
-		library.studentsListToXml();
+//		library.studentsListToXml();
+//		Author.authorToXml(eliade);
+//		Student.studentToXml(s1);
+//		PublishingHouse.pubHouseToXml(ph);
+//		Genre.genreToXml(romantic);
+		
+//		b2.xmlToBook();
+//		library.xmlToBooks();
+//		library.xmlToAuthors();
+//		eliade.xmlToAuthor();
+//		hum.xmlToPubHouse();
+//		library.xmlToPubHouses();
+//		romantic.xmlToGenre();
+//		library.xmlToGenres();
+//		s1.xmlToStudent();
+		library.xmlToStudents();
 	}
 }
